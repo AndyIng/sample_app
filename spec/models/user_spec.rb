@@ -37,7 +37,7 @@ require 'spec_helper'
       valid_email_user = User.new(@attr.merge(:email => address))
       valid_email_user.should be_valid
     end
-end
+   end
   
    it "should reject invalid email addresses" do
     addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
@@ -114,6 +114,10 @@ it "should reject email addresses identical up to case" do
 end
 
       describe "authenticate method" do
+      
+       it "should exist" do
+        User.should respond_to(:authenticate)
+      end
            
         it "should rturn nil on email/password mismatch" do
             wrong_password_user = User.authenticate(@attr[:email],"wrongpass")
@@ -129,5 +133,27 @@ end
          matching_user.should == @user
       end
     end
-end     
+    end
+
+
+describe "admin attribute" do
+
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should respond to admin" do
+      @user.should respond_to(:admin)
+    end
+
+    it "should not be an admin by default" do
+      @user.should_not be_admin
+    end
+
+    it "should be convertible to an admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
+  end
 end
+
