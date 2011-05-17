@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
          return user if user.has_password?(submitted_password)
     end
     
+     def feed
+    # This is preliminary. See Chapter 12 for the full implementation.
+    Micropost.where("user_id = ?", id)
+     end
+
      def self.authenticate_with_salt(id, cookie_salt)
          user = find_by_id(id)
          (user && user.salt == cookie_salt) ? user : nil
