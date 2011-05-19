@@ -32,7 +32,6 @@ Spork.prefork do
     controller.sign_in(user)
     end
  end
-
 end
 
 Spork.each_run do
