@@ -1,5 +1,5 @@
 SampleApp::Application.routes.draw do
-  get "sessions/new"
+  
 
  resources :users do 
     member do
